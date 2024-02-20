@@ -1,4 +1,4 @@
-FROM richarvey/nginx-php-fpm:8.2.4
+FROM richarvey/nginx-php-fpm:latest
 
 COPY . .
 
