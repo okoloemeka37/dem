@@ -74,19 +74,19 @@
 
   
   <label for="page">Number Of Pages</label>
-  <input type="text" class="vb" id="page" name="page" value="{{old('page')}}">
+  <input type="text" class="vb" id="page" name="page" value="{{$book->page}}">
   @error("page")
   <p class="text-danger">{{$message}}</p>
 @enderror
 
 <label for="language">Language</label>
-<input type="text" class="vb" id="language" name="language" value="{{old('language')}}">
+<input type="text" class="vb" id="language" name="language" value="{{$book->language}}">
 @error("language")
 <p class="text-danger">{{$message}}</p>
 @enderror
 
 <label for="ISBN">ISBN</label>
-<input type="text" class="vb" id="ISBN" name="ISBN" value="{{old('ISBN')}}">
+<input type="text" class="vb" id="ISBN" name="ISBN" value="{{$book->ISBN}}">
 @error("ISBN")
 <p class="text-danger">The ISBN field must be a number.</p>
 @enderror

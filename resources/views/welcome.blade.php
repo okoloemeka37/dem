@@ -224,11 +224,13 @@ fetch(`https://openexchangerates.org/api/latest.json?app_id=${id}`, options)
           <div class="book-info">
             <h3 class="title">{{$book['title']}}</h3>
              <p>{{$book['genre']}}</p>
-            <p class="author">{{$book['author']}} (<span>Uploaded by <a href="{{route('sortAuth',$book->user_id)}}" style="color: red;" > {{$book->user['name']}}</a></span>)</p>
+            <p class="author">{{$book['author']}} (<span>Uploaded by <a href="{{route('sortAuth',$book->user_id)}}" style="color: red;" > {{$book['title']}}</a></span>)</p>
           
         </div>
-
-            <p class="price">Price:<span style=" color:skyblue" id=book{{ $book->id }} > @if($book['price']=='')  Free Download @else  <script>change({{$book['price']}},{{$book['id']}})</script> </span> @endif</p>
+<p class="price">Price:<span style=" color:skyblue" id="book{{ $book['id'] }}">
+     @if($book->price =='')  Free Download 
+     @else  <script>change({{$book['price']}},{{$book['id']}})</script>
+     </span> @endif</p>
     </a>
         </div>
    
