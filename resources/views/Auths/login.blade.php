@@ -22,8 +22,7 @@
 
     <div class="registration-container reg" >
         <h2>Login TO Continue</h2>
-        <form method="POST" action="{{route('login_handle')}}">
-
+        <form method="POST" action="https://zylerlib.cleverapps.io/loginPost">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
             @if (session('error'))
