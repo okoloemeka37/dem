@@ -235,7 +235,7 @@ Route::middleware(['guest'])->group(function () {
         return view('Auths.Register');
     })->name("register");
 
-    Route::post("/register",[AuthController::class, 'register_normal'])->name('register_handle');
+    Route::post("/registerPost",[AuthController::class, 'register_normal'])->name('register_handle');
     Route::post("/Aregister",[AuthController::class, 'register_author'])->name('register_handle_author');
    Route::post("/loginPost",[AuthController::class,'login'])->name('login_handle');
 
