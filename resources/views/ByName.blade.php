@@ -83,8 +83,8 @@ margin-top: 10%;
 
 
     <div class="author-profile">
-
-        @if ($user[0]['id']== auth()->user()['id'])
+{{auth()->user()}}
+        @if ($user[0]['id'] == auth()->user()['id'])
 
             @else
             @if (session('message'))
@@ -93,9 +93,9 @@ margin-top: 10%;
             <p class="report"><a href="{{route('report_index',['User',$user[0]['id']])}}">Report This Account</a> </p>
 
             @endif
-           
+
         @endif
-   
+
 
         <h1>{{$user[0]->name}}</h1>
         <p class="e">Email: {{$user[0]->email }}</p>
@@ -104,14 +104,14 @@ margin-top: 10%;
         <div >
             <h2>Books by {{$user[0]->name }}</h2>
             <div class="book-flex">
-    
+
                 @if(count($books)===0)
                 <h4>No Books Available</h4>
                 @else
                 @foreach ($books as $book )
-             
+
                 <?php $image="BookImages/".$book['image'] ?>
-               
+
                 <div class="book-entry bookies">
         <a href="{{route('sin',$book['id'])}}">
                   <img class="book-image" src="{{ URL::asset($image) }}" alt="Book Image 1">
@@ -119,13 +119,13 @@ margin-top: 10%;
                     <h3 class="title">{{$book['title']}}</h3>
                      <p>{{$book['genre']}}</p>
                     <p class="author">{{$book['author']}} (<span>Uploaded by <a href="{{route('sortAuth',$book->user_id)}}" style="color: red;"> {{$book->user['name']}}</a></span>)</p>
-                  
+
                 </div>
-        
+
                     <p class="price">Price:@if($book['price']=='') <span style=" color:skyblue"> Free Download </span>@else {{$book['price']}} @endif</p>
             </a>
                 </div>
-           
+
                 @endforeach
                 @endif
         </div>
@@ -134,13 +134,13 @@ margin-top: 10%;
             <h2>Blogs by {{$user[0]->name }}</h2>
             <ul>
                 @if (true)
-                   
+
                 @else
                 @foreach ($books as $book)
                 <li>{{ $book->title }}</li>
             @endforeach
                 @endif
-               
+
             </ul>
         </div>
     </div>
