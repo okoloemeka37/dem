@@ -11,11 +11,11 @@
         display: flex;
         justify-content: center;
         align-items: center;
-      
+
     }
 </style>
-  
-  
+
+
 <body>
 	  @vite( ['resources/sass/app.scss'])
 
@@ -23,8 +23,9 @@
     <div class="registration-container reg" >
         <h2>Login TO Continue</h2>
         <form method="POST" action="{{route('login_handle')}}">
-            @csrf
-          
+
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
             @if (session('error'))
             <p class="text-danger">{{session('error')}}</p>
         @endif
@@ -38,15 +39,15 @@
         <label for="password">Password:</label>
         <input type="password" name="password" @error('password') style=" border: 1px solid #ff0000;" @enderror >
         @error('password')<p class="text-danger">{{$message}} </p>@enderror
-          
+
         <button type="submit" class="login" id="f">Login</button>
-				
+
         </form>
          <div class="login-link">
       Don't have an account? <a href="{{route('register')}}">signup here</a>
     </div>
     </div>
-   
-    
+
+
 </body>
 </html>

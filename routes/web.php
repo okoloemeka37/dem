@@ -71,7 +71,7 @@ Route::post("/live",[IndexPageController::class,'live'])->name('live');
 Route::get("/genre{gen}",[IndexPageController::class, 'genre'])->name('genre');
 
 Route::middleware(['auth'])->group(function () {
-    
+
 //report page
 Route::get('/reportConsole/{type}/{id}',[ReportController::class,'index'])->name('report_index');
 Route::post('/reportstore',[ReportController::class,'store'])->name('report_store');
@@ -82,7 +82,7 @@ Route::post('/reportstore',[ReportController::class,'store'])->name('report_stor
 
 
 
-  
+
     //editing user profile
 
     Route::get('/editProfile',function(){
@@ -110,7 +110,7 @@ Route::post("/livesearch",[BooksController::class,"search"]);
 
 
 
-//viewing single book 
+//viewing single book
 Route::get('/book/{id}',[BooksController::class,'single'])->name("sin");
 
 
@@ -152,7 +152,7 @@ Route::middleware(['admin'])->group(function(){
 Route::post("/removebook",[BooksController::class,"remove"]);
 
 Route::post("/restore_book",[BooksController::class,"restore"]);
-   
+
     //blog show
     Route::get("/createPost",function(){
         return view("blog.createPost");
@@ -177,7 +177,7 @@ Route::middleware(['author'])->group(function(){
     Route::get("/createPost",function(){
         return view("blog.createPost");
     })->name('createPost');
- 
+
     Route::post("/submitPost",[PostsController::class,'handlePost'])->name("handlePost");
     Route::get("/editpost/{id}",[PostsController::class,'editpost'])->name("edit_post");
 
@@ -191,7 +191,7 @@ Route::middleware(['author'])->group(function(){
 
 
 });
- 
+
 
 
 
@@ -200,7 +200,7 @@ Route::middleware(['author'])->group(function(){
 
 
  Route::post("/logout",[AuthController::class,'logout'])->name('logout');
-    
+
     // becoming An Author show
 
     Route::get("/beAuthor",[AuthController::class,'BeAuthShow'])->name('BeAuthShow');
@@ -209,8 +209,8 @@ Route::middleware(['author'])->group(function(){
 
     //blog show
 
-   
- 
+
+
 });
 
 
@@ -237,7 +237,7 @@ Route::middleware(['guest'])->group(function () {
 
     Route::post("/register",[AuthController::class, 'register_normal'])->name('register_handle');
     Route::post("/Aregister",[AuthController::class, 'register_author'])->name('register_handle_author');
-   Route::post("/login",[AuthController::class,'login'])->name('login_handle');
+   Route::post("/loginPost",[AuthController::class,'login'])->name('login_handle');
 
 });
 
