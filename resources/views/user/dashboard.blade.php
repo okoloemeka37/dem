@@ -10,79 +10,73 @@
 
     <header>
 <h2>DashBoard</h2>
-    
+
   </header>
 
   @extends('all.sideNav')
 
   @section('con')
- 
+
   @endsection
 
   <section>
     <p class="cu" name="Dashboard"></p>
 
 
-    
+
     <div class="dashboard-summary">
       <div class="summary-box">
         <h3><a href="{{route('Authorbook')}}">Books</a></h3>
         <p>{{$book}}</p>
       </div>
       <div class="summary-box">
-        <h3>Posts</h3>
+        <h3> <a class="non" href="{{route('AuthorPost')}}">Posts</a></h3>
         <p> {{$post}}</p>
       </div>
 
       <div class="summary-box">
         <h3> <a href="{{route('notice')}}">Notification</a></h3>
-        <p>{{$book}}</p>
+        <p>{{count($note)}}</p>
       </div>
     </div>
 
-    <div class="graph-container">
-      <h2>Daily Sales Graph</h2>
-      <!-- Add your graph component here (e.g., using a chart library) -->
-    </div>
 
-  
+    <div class="llp">
+        <h1 class="d">Activities</h1>
 
-    <div class="invoice-section">
-      <h2>Invoices</h2>
+        @foreach($note as $tr)
 
-      <table>
-        <thead>
-          <tr>
-            <th>Client</th>
-            <th>Date</th>
-            <th>Invoice</th>
-            <th>Amount</th>
-            <th>Status</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Client A</td>
-            <td>2023-11-01</td>
-            <td>#123</td>
-            <td>$200</td>
-            <td>Paid</td>
-            <td class="invoice-item-actions"><button>Delete</button></td>
-          </tr>
-          <tr>
-            <td>Client B</td>
-            <td>2023-11-02</td>
-            <td>#124</td>
-            <td>$150</td>
-            <td>Unpaid</td>
-            <td class="invoice-item-actions"><button>Delete</button></td>
-          </tr>
-          <!-- Add more invoice items as needed -->
-        </tbody>
-      </table>
+        <div class="Dasnotification success">
+          @if ($tr->for_text =="posts")
+          <p><a href="{{route('indPost',$tr->item_id)}}">{{$tr->description}} Your {{$tr->for_text}}</p></a>
+          @else
+          <p><a href="{{route('sin',$tr->item_id)}}">{{$tr->description}} Your {{$tr->for_text}}</p></a>
+          @endif
+            <span class="close-btn" id="{{$tr->id}}" >&times;</span>
+        </div>
+        @endforeach
     </div>
   </section>
 
+  <script>
+    let brn =document.querySelectorAll(".close-btn")
+    brn.forEach(bus => {
+    bus.addEventListener("click",()=>{
+        let id=bus.id;
+            console.log("jello");
+
+            bus.parentElement.remove();
+            fetch(`/check/${id}`,{
+                method:"GET",
+                headers:{
+            'Content-Type':'application/json',
+            "_token": "{{csrf_token()}}",
+        },
+            })
+
+        })
+    });
+
+  </script>
 </body>
 </html>

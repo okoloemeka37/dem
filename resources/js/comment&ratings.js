@@ -9,16 +9,16 @@ if (document.querySelector(".check")) {
             document.querySelector(".down").click()
             document.querySelector(".alert2").style.display="none"
         }, 1500);
-      
+
     }
-    
+
     check=document.querySelector(".proceed").addEventListener("click",()=>{
         document.querySelector("#popup-container").style.display="none"
         document.querySelector("#overlay").style.display="none"
     })
-    
-    
-    
+
+
+
     document.querySelector(".down").addEventListener('click',()=>{
         document.querySelector("#popup-container").style.display="block"
         document.querySelector("#overlay").style.display="block"
@@ -36,7 +36,7 @@ let table=document.querySelector(".table").getAttribute('name');
 let btn=document.querySelector(".Add_comment")
 let csrf=document.querySelectorAll("input")[0]
 btn.addEventListener("click",(e)=>{
-    
+
    e.preventDefault();
    let content=document.querySelector(".content");
    console.log(content)
@@ -62,12 +62,14 @@ btn.addEventListener("click",(e)=>{
             'X-CSRF-TOKEN':csrf.value
         },
         body:JSON.stringify(data)
-    }).then(
-        get(),
-    
-        document.querySelector(".content").value=" "
-    )
-    
+    }).then(()=>{
+         document.querySelector(".content").value=" ";
+
+         setTimeout(() => {
+            get();
+         }, 1500);
+    })
+
  }
 })
 get()
@@ -89,7 +91,7 @@ fetch('/get_comment',{
 .then(data=>{
         document.querySelector(".comments").innerHTML=data;
         setTimeout(() => {
-            reply() 
+            reply()
             edit()
             del()
          }, 1000);
@@ -99,7 +101,7 @@ fetch('/get_comment',{
 
 function reply(params) {
     let reply_btn=document.querySelectorAll(".reply-btn");
-    
+
     reply_btn.forEach(btn => {
         btn.addEventListener('click',()=>{
            let content= document.querySelector(".content");
@@ -107,7 +109,7 @@ function reply(params) {
            content.setAttribute("placeholder","Enter Reply");
            document.querySelector(".parent_id").value=btn.id
         })
-    });     
+    });
 }
 
 
@@ -132,9 +134,9 @@ function reply(params) {
     function sub_edit(params) {
         document.querySelector(".edit_comment").addEventListener("click",()=>{
             let content= document.querySelector(".content")
-            
+
              let comment_id=document.querySelector(".ed_id").value;
-           
+
 
              let data={
                 'content':content.value,
@@ -156,7 +158,7 @@ function reply(params) {
                     document.querySelector(".Add_comment").style.display="block",
                     document.querySelector(".content").value=" "
                 )
-                
+
              }
         })
     }
@@ -177,14 +179,14 @@ function del(params) {
         })
     })
 }
-  
-     
+
+
 
 
 //ratings function
 
 if (document.querySelectorAll(".star")[0]) {
-    
+
 
 let rating_btns=document.querySelectorAll(".star");
 rating_btns.forEach(btn => {
@@ -193,31 +195,31 @@ rating_btns.forEach(btn => {
         if (id==1) {
             btn.classList.replace("fa-regular","fa-solid")
             for (let index = id; index < rating_btns.length; index++) {
-               
+
                 rating_btns[index].classList= "fa-regular fa-star star";
-                
+
             }
         }else{
             for (let index = id-1; index > -1; index--) {
-               
+
                 rating_btns[index].classList.replace("fa-regular","fa-solid")
-                
+
             }
             for (let index = id; index < rating_btns.length; index++) {
-               
+
                 rating_btns[index].classList= "fa-regular fa-star star";
-                
+
             }
         }
-        
+
         let book_id=document.querySelector(".book_id").value;
 
         let data={
             'book_id':book_id,
             'rate':id,
-           
+
         }
-        
+
         fetch("/add_rating",{
             method:"POST",
             headers:{
@@ -241,30 +243,30 @@ function p_rate() {
             'Content-Type':"application/json",
             'X-CSRF-TOKEN':csrf.value
         },
-       
+
     }).then(resp=>resp.json())
     .then(data=>{
        if (data['rating'].length===0) {
-        
+
        }else{
         let id=data['rating'][0]['rate'];
         if (id==1) {
             rating_btns[0].classList.replace("fa-regular","fa-solid")
-           
+
         }else{
             for (let index = id-1; index > -1; index--) {
-               
+
                 rating_btns[index].classList.replace("fa-regular","fa-solid")
-                
+
             }
             for (let index = id; index < rating_btns.length; index++) {
-               
+
                 rating_btns[index].classList= "fa-regular fa-star star";
-                
+
             }
         }
     }
-   
+
     })
 
 }
@@ -282,20 +284,20 @@ function other_rating(){
             'Content-Type':"application/json",
             'X-CSRF-TOKEN':csrf.value
         },
-       
+
     }).then(resp=>resp.json())
     .then(data=>{
-      
+
 
 
         raters.innerHTML=data['rating'].length;
         let som=0
         data['rating'].forEach(sot => {
          som += sot['rate'];
-         
+
        if (som>20 && som < 101) {
         if (som <=80) {
-           
+
             document.querySelector("#h1").classList.add("fa-star","fa-star-half-stroke")
         }else{
         document.querySelector("#h1").classList.replace("fa-regular","fa-solid")
@@ -304,7 +306,7 @@ function other_rating(){
        if (som>120 && som < 201) {
         document.querySelector("#h1").classList.replace("fa-regular","fa-solid")
         if (som <=180) {
-           
+
             document.querySelector("#h2").classList.add("fa-star","fa-star-half-stroke")
         }else{
         document.querySelector("#h2").classList.replace("fa-regular","fa-solid")
@@ -314,7 +316,7 @@ function other_rating(){
         document.querySelector("#h1").classList.replace("fa-regular","fa-solid")
         document.querySelector("#h2").classList.replace("fa-regular","fa-solid")
         if (som <=280) {
-           
+
             document.querySelector("#h3").classList.add("fa-star","fa-star-half-stroke")
         }else{
         document.querySelector("#h3").classList.replace("fa-regular","fa-solid")
@@ -325,7 +327,7 @@ function other_rating(){
         document.querySelector("#h2").classList.replace("fa-regular","fa-solid")
         document.querySelector("#h3").classList.replace("fa-regular","fa-solid")
         if (som <=380) {
-           
+
             document.querySelector("#h4").classList.add("fa-star","fa-star-half-stroke")
         }else{
         document.querySelector("#h4").classList.replace("fa-regular","fa-solid")
@@ -335,9 +337,9 @@ function other_rating(){
         document.querySelector("#h2").classList.replace("fa-regular","fa-solid")
         document.querySelector("#h3").classList.replace("fa-regular","fa-solid")
         document.querySelector("#h4").classList.replace("fa-regular","fa-solid")
-      
+
         if (som <=580) {
-           
+
             document.querySelector("#h5").classList.add("fa-star","fa-star-half-stroke")
         }else{
         document.querySelector("#h5").classList.replace("fa-regular","fa-solid")
@@ -354,9 +356,9 @@ function other_rating(){
          }else{
             rates.innerHTML=som
          }
-            
+
         });
-    }) 
+    })
 }
 
 }

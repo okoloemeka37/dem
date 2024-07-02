@@ -68,13 +68,51 @@ header h2{
     text-align: center;
   }
 
-  .graph-container {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin: 10px;
-  }
+
+  //dashnot
+
+
+  .Dasnotification {
+    padding: 15px;
+    margin: 10px 0;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    position: relative;
+}
+
+.success {
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    color: #155724;
+}
+
+.error {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    color: #721c24;
+}
+
+.Dasinfo {
+    background-color: #cce5ff;
+    border-color: #b8daff;
+    color: #004085;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #aaa;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    color: #000;
+}
+
+
+
 
   .admin-info {
    margin-left: 5%;
@@ -88,52 +126,13 @@ margin-top: 0px;
     border-radius: 50%;
     margin-right: 10px;
     margin-left: 15%;
-    
+
   }
   .admin-info span{
     display: block;
   }
 
-  .invoice-section {
-    margin-top: 40px;
-  }
 
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-  }
-
-  th, td {
-    border: none;
-    padding: 12px;
-    text-align: left;
-  }
-
-  th {
-    background-color: #3498db;
-    color: #fff;
-  }
-tr{
-  border-bottom: .4px solid rgb(192, 192, 192);
-}
-  .invoice-item-actions button {
-    background-color: #e74c3c;
-    color: #fff;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  .user-actions button {
-    
-    color: #fff;
-    padding: 8px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-right: 5px;
-  }
 .ws{
   background-color: #2ecc71;
 }
@@ -182,9 +181,9 @@ margin-bottom: 10px;}
     height: auto;
     margin-top: 10px;
   }
-  
+
   .fakebtn {
-   
+
     color: #fff;
     padding: 10px 20px;
     border-radius: 15px;
@@ -194,7 +193,7 @@ margin-bottom: 10px;}
     text-align: center;
     display: block;
   }
-  
+
   .aimg{
     background-color: #0b9e37;
   }
@@ -248,7 +247,7 @@ margin-bottom: 10px;}
 //Books.blades page
 
 
- 
+
     .search-bar {
       margin-bottom: 20px;
     }
@@ -269,7 +268,7 @@ margin-bottom: 10px;}
     }
 
     .book-entry ,.book-entry-norms {
-    
+
       background-color: #fff;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       overflow: hidden;
@@ -279,7 +278,7 @@ margin-bottom: 10px;}
     }
     .blur{
 position: absolute;
-     
+
       top: 0;
       left: 0;
       width: 100%;
@@ -287,7 +286,7 @@ position: absolute;
       background-color: rgba(0, 0, 0, 0.493);
       z-index: 999;
     }
-   
+
     .blur p{
       padding-top: 50%;
       padding-left: 10%;
@@ -359,7 +358,7 @@ position: absolute;
     .nice-buttons .restore-norms:hover{
       background-color: #34db95;
       color: #ffffff;
-     
+
     }
     .delete-norms{
       background-color: #fff;
@@ -372,9 +371,9 @@ position: absolute;
     }
 .delete-norms:hover{
   background-color: #bb2b2b;
-  color: #fff; 
+  color: #fff;
 }
-    
+
     .view-more-button {
       width:30%;
       padding: 12px;
@@ -392,7 +391,7 @@ position: absolute;
       background-color:  #3498db;;
       color: white;
     }
-    
+
     .genre{
       font-size: 13px;
     }
@@ -415,10 +414,10 @@ position: absolute;
       }
       50%{
         opacity: 0;
-       
+
       }
       100%{
-       
+
       }
     }
 
@@ -433,12 +432,12 @@ position: absolute;
     .df{
       display: flex;
       justify-content: flex-end;
-      
+
       margin-bottom: 30px;
   }
 
 
-  
+
    .tf{
       width: fit-content;
       padding: 5px 10px;
@@ -452,8 +451,8 @@ position: absolute;
   }
   .tf:hover{
       background-color:  #3498db;
-   
-  } 
+
+  }
 
   .now{
     background-color:  #3498db;
@@ -507,7 +506,7 @@ position: absolute;
 //notification page style
 
 
-   
+
 
 .notification {
   border: 1px solid #ddd;
