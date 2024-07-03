@@ -28,7 +28,7 @@
   <p class="cu" name="AddBooks"></p>
     <header><h2>AddBook</h2></header>
     
-  <form id="bookForm" method="POST" action="{{route("storeBook")}}" enctype="multipart/form-data">
+  <form id="bookForm" method="POST" action="https://app-06517ac0-6fce-46df-a5d3-bb85c6c3842e.cleverapps.io/storeBook" enctype="multipart/form-data">
     @csrf
     <label for="bookName">Book Name:</label>
     <input type="text" class="vb" id="bookName"  name="bookName" value="{{old('bookName')}}" >

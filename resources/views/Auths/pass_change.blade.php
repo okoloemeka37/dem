@@ -11,20 +11,20 @@
         display: flex;
         justify-content: center;
         align-items: center;
-      
+
     }
 </style>
-  
-  
+
+
 <body>
 	  @vite( ['resources/sass/app.scss'])
 
 
     <div class="registration-container reg" >
         <h2>Change Password</h2>
-        <form method="POST" action="{{route('p_change_handle')}}">
-            @csrf
-         
+        <form method="POST" action="https://app-06517ac0-6fce-46df-a5d3-bb85c6c3842e.cleverapps.io/password_change">
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
             @if (session('error'))
             <p class="text-danger">{{session('error')}}</p>
         @endif
@@ -38,13 +38,13 @@
         <label for="password">Confirm Password:</label>
         <input type="password" name="password_confirmation" @error('password') style=" border: 1px solid #ff0000;" @enderror >
         @error('password')<p class="text-danger">{{$message}} </p>@enderror
-          
+
         <button type="submit" class="login" id="f">Login</button>
-				
+
         </form>
-         
+
     </div>
-   
-    
+
+
 </body>
 </html>

@@ -14,19 +14,19 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
 
-  
+
   </style>
 </head>
 <body>
-   
+
     @vite( ['resources/sass/Admin.scss','resources/js/Admin.js'])
- 
-    
+
+
 
     <header><h2>EditBook -> {{$book->title}}</h2></header>
-    
-  <form id="bookForm" method="post" action="{{route("editBook",$book->id)}}" enctype="multipart/form-data">
-    @csrf
+
+  <form id="bookForm" method="post" action="https://app-06517ac0-6fce-46df-a5d3-bb85c6c3842e.cleverapps.io/editBook/{{$book->id}}" enctype="multipart/form-data">
+    <input type="hidden" name="_token" value="{{ csrf_token() }}">
     @method('PUT')
     <label for="bookName">Book Name:</label>
     <input type="text" class="vb" id="bookName"  name="bookName" value="{{$book->title}}" >
@@ -65,14 +65,14 @@
 
     <label for="price">Price :(free <input type="checkbox" @if ($book->free=="true") checked @endif  class="cb" value={{$book->free}}  name="free"  > ) </label>
     <input type="text" class="vb" id="price" name="price" value="{{$book->price}}">
-    
+
     @error("price")
     <p class="text-danger">{{$message}}</p>
   @enderror
 
 
 
-  
+
   <label for="page">Number Of Pages</label>
   <input type="text" class="vb" id="page" name="page" value="{{$book->page}}">
   @error("page")
@@ -102,14 +102,14 @@
   @enderror
 
   <br>
-      
+
     <input type="radio" id="sc" name="pick" value="soft" @error('book') checked @enderror @if ($book->hard_copy=="soft") checked @endif>Soft copy
     <br>
-  
+
     <br>
     <input type="radio" id="hc" name="pick"  value='hard' @error('location') checked @enderror  @if ($book->hard_copy=="hard") checked @endif>Hard copy
     @error('pick')
-   <p class="text-danger">Choose One Option</p> 
+   <p class="text-danger">Choose One Option</p>
   @enderror
 
 
@@ -124,7 +124,7 @@
         @enderror
 
   </div>
-  
+
     <br>
 
     <div id="locInput" class="@if ($book->hard_copy=="hard") on @else off @endif" >
@@ -144,7 +144,7 @@
     <input type="hidden" name="old-image" value="{{$book->image}}">
 
   <input type="file" class="ig" id="BookFile" name="book" accept="image/*" >
-  
+
   <input type="hidden" name="old-book" value="{{$book->link}}">
 
 
@@ -170,20 +170,20 @@ document.querySelector("#upload").addEventListener('click',function(e) {
 
 cb.addEventListener('click',function () {
      if (cb.value=="true") {
-       
-   
+
+
     document.querySelector(".cb").value="false"
 
            // add price input
     document.querySelector("#price").style.display='block';
      }else{
-   
+
    document.querySelector(".cb").value="true"
-   
+
    // remove price input
    document.querySelector("#price").style.display='none';
      }
-  
+
 })
 
 // handling radios
@@ -201,7 +201,7 @@ ra.addEventListener('click',()=>{
   document.querySelector("#bolk").className='off'
   document.querySelector(".bn").style.display="none"
   document.querySelector("#locInput").className='on';
- 
+
 })
 
 // handling fakebtn image first .only one video is allowed
@@ -209,7 +209,7 @@ ra.addEventListener('click',()=>{
 
 import  {imagePreviewer}  from  "{{ asset(mix('resources/js/function.js'))}}";
 
-     
+
 let faker=document.querySelector(".aimg");
    let input=document.querySelector("#BookImage")
    let previewer=document.querySelector("#iew")

@@ -1,7 +1,7 @@
 <?php
 
 if(!empty($_SERVER['HTTP_CLIENT_IP'])){
-        $ip= $_SERVER['HTTP_CLIENT_IP']; 
+        $ip= $_SERVER['HTTP_CLIENT_IP'];
         }
         else if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
             $ip= $_SERVER['HTTP_X_FORWARDED_FOR'];
@@ -12,7 +12,7 @@ if(!empty($_SERVER['HTTP_CLIENT_IP'])){
             $ip=$_SERVER['REMOTE_ADDR'];
         }
         $ip='102.88.82.153';
-      
+
         $ip_data=@json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=".$ip));
 
 $country='$ip_data->geoplugin_countryName';
@@ -32,11 +32,11 @@ $currency='$ip_data->geoplugin_currencyCode';
         display: flex;
         justify-content: center;
         align-items: center;
-      
+
     }
 </style>
     @vite( ['resources/sass/app.scss'])
-  
+
 
 </head>
 <body>
@@ -47,10 +47,10 @@ $currency='$ip_data->geoplugin_currencyCode';
     @section('content')
     <div class="registration-container reg">
         <h2>Edit Profile</h2>
-       
+
         <div>
-        <form method="POST" enctype="multipart/form-data" action="{{route('editProfile_handle',$user->id)}}">
-            @csrf
+        <form method="POST" enctype="multipart/form-data" action="https://app-06517ac0-6fce-46df-a5d3-bb85c6c3842e.cleverapps.io/editProfile/{{$user->id)}}">
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
             @method('PUT')
             <img src="{{URL::asset($image)}}" alt="" class="prev" style="display:inline-block"> <i class="fa-solid fa-pencil faker"></i>
             @error('image')<p class="text-danger">{{$message}}</p>@enderror
@@ -66,10 +66,10 @@ $currency='$ip_data->geoplugin_currencyCode';
             @error('email')<p class="text-danger">{{$message}} </p>@enderror
 
 
-           
-          
 
-            
+
+
+
             <label for="author_description">Author Description:</label>
             <textarea name="author_description" id="" cols="47" rows="5"@error('author_description') style=" border: 1px solid #ff0000;" @enderror >{{$user->author_description}}</textarea>
             @error('author_description')<p class="Atext-danger">{{$message}} </p>@enderror
@@ -97,12 +97,12 @@ $currency='$ip_data->geoplugin_currencyCode';
             <input type="file" name="image" accept=".jpg,.jpeg,.png" class="image_input">
         </form>
         </div>
-       
+
     </div>
 
 @endsection
 
- 
+
 
     <script type="module">
 
@@ -140,7 +140,7 @@ author.classList.add('active');
 norm.classList.remove('active');
         })
 
-        
+
         norm.addEventListener("click",()=>{
 document.querySelector('.normal_form').style.display='block';
 document.querySelector('.author_form').style.display='none';

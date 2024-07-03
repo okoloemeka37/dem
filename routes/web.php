@@ -89,7 +89,7 @@ Route::post('/reportstore',[ReportController::class,'store'])->name('report_stor
 return view('Auths.profile_edit');
     })->name('profile_edit');
 
-    Route::put("editProfile{id}",[AuthController::class,'edit'])->name('editProfile_handle');
+    Route::put("editProfile/{id}",[AuthController::class,'edit'])->name('editProfile_handle');
 
     Route::get("/emailConfirmation",[AuthController::class,'codeSend'])->name('confirm_email');
     Route::post("/codeCheck",[AuthController::class,'codeCheck'])->name('codeCheck');

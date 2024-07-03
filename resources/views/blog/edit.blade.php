@@ -69,14 +69,16 @@ button:hover {
 }
 </style>
 <body>
-   
+
     <header><h2>Edit Post</h2></header>
 <div class="container">
     <h2>Edit Article {{$post['title']}}</h2>
 
 
-    <form action="{{route('updatePost',$post['id'])}}" method="post" enctype="multipart/form-data">
-        @csrf
+    <form action="https://app-06517ac0-6fce-46df-a5d3-bb85c6c3842e.cleverapps.io/updatePost/{{$post['id'])}}" method="post" enctype="multipart/form-data">
+
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
         <label for="title">Title:</label>
         <input type="text" id="title" name="title" value="{{$post['title']}}">
         @error('title')
@@ -88,11 +90,11 @@ button:hover {
         @error('tag')
             <p class="text-danger">{{$message}}</p>
         @enderror
-        
+
     <div class="dropsHolder"></div>
 
 
-        
+
         <label for="slug">Slug:</label>
         <input type="text" id="slug" name="slug" value="{{$post['slug']}}">
         @error('slug')
@@ -106,7 +108,7 @@ button:hover {
     @enderror
 
         <label for="title">Image:</label>
-      
+
         <span class="image_fake_btn faker" style="width:fit-content; background-color: #049724;">Choose Post Image</span>
         @error('image')
         <p class="text-danger">{{$message}}</p>
@@ -126,21 +128,21 @@ button:hover {
 
      import  {imagePreviewer}  from  "{{ asset(mix('resources/js/function.js'))}}";
 
-     
+
      let faker=document.querySelector(".faker");
         let input=document.querySelector(".image_input")
         let previewer=document.querySelector(".prev")
         imagePreviewer(faker,previewer,input);
 
-     
+
         CKEDITOR.ClassicEditor.create( document.querySelector( '#content' ),{
            ckfinder:{
                 uploadUrl:"{{route('ck_upload',['_token'=>csrf_token()])}}"
             },
-          
+
                 toolbar: {
                     items: [
-                        
+
                         'heading', '|',
                         'bold', 'italic', 'strikethrough', 'underline', 'code', 'subscript', 'superscript', 'removeFormat', '|',
                         'bulletedList', 'numberedList', 'todoList', '|',
@@ -151,7 +153,7 @@ button:hover {
                         'alignment', '|',
                         'link', 'uploadImage', 'blockQuote', 'insertTable', 'mediaEmbed', 'codeBlock', 'htmlEmbed', '|',
                         'specialCharacters', 'horizontalLine', 'pageBreak', '|',
-                       
+
                     ],
                     shouldNotGroupWhenFull: true
                 },
@@ -252,7 +254,7 @@ button:hover {
                     // 'ExportWord',
                     'AIAssistant',
                     'CKBox',
-                  
+
                     // This sample uses the Base64UploadAdapter to handle image uploads as it requires no configuration.
                     // https://ckeditor.com/docs/ckeditor5/latest/features/images/image-upload/base64-upload-adapter.html
                     // Storing images as Base64 is usually a very bad idea.
@@ -274,7 +276,7 @@ button:hover {
                     'MathType',
                     // The following features are part of the Productivity Pack and require additional license.
                     'SlashCommand',
-                   
+
                     'DocumentOutline',
                     'FormatPainter',
                     'TableOfContents',
