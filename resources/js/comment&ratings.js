@@ -155,12 +155,14 @@ function reply(params) {
                         'X-CSRF-TOKEN':csrf.value
                     },
                     body:JSON.stringify(data)
-                }).then(
+                }).then(()=>{
+                   setTimeout(() => {
                     get(),
                     document.querySelector(".edit_comment").style.display="none",
                     document.querySelector(".Add_comment").style.display="block",
                     document.querySelector(".content").value=" "
-                )
+                   }, 1500);
+                })
 
              }
         })

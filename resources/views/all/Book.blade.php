@@ -1,7 +1,7 @@
 <?php use Illuminate\Support\Carbon;?>
 <?php
 if(!empty($_SERVER['HTTP_CLIENT_IP'])){
-        $ip= $_SERVER['HTTP_CLIENT_IP']; 
+        $ip= $_SERVER['HTTP_CLIENT_IP'];
         }
         else if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
             $ip= $_SERVER['HTTP_X_FORWARDED_FOR'];
@@ -12,7 +12,7 @@ if(!empty($_SERVER['HTTP_CLIENT_IP'])){
             $ip=$_SERVER['REMOTE_ADDR'];
         }
         $ip='102.88.82.153';
-      
+
         $ip_data=@json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=".$ip));
 
 
@@ -26,7 +26,7 @@ $currency=$ip_data->geoplugin_currencyCode;
 
     <title>{{$book[0]['title']}}</title>
    <style>
-      
+
         section {
             max-width: 800px;
             margin: 20px auto;
@@ -65,7 +65,7 @@ margin-left:45% ;
 </head>
 <script defer>
 function change(price,dom,state) {
-    
+
     let id="93be5a7561d547409152e8cc5ff50773";
 let newState=document.querySelector(".cur").getAttribute('type');
 
@@ -77,14 +77,14 @@ fetch(`https://openexchangerates.org/api/latest.json?app_id=${id}`, options)
     let bookOriginalRate=Math.ceil(Number(price)/response['rates'][state]);
 
     let rate=response['rates'][newState];
-   
+
     let changeTo=Math.ceil(Number(bookOriginalRate)*rate);
 
     let id="#"+"book"+Number(dom).toString();
-  
+
     document.querySelector(id).innerHTML=newState+" "+changeTo;
-    
-    
+
+
 
   })
   .catch(err => console.error(err));
@@ -115,7 +115,7 @@ fetch(`https://openexchangerates.org/api/latest.json?app_id=${id}`, options)
         <p class="report"><a href="{{route('report_index',['Book',$book[0]['id']])}}">Report This Book</a> </p>
 
         @endif
-       
+
     @endif
 
         @foreach ($book as $rt)
@@ -123,19 +123,19 @@ fetch(`https://openexchangerates.org/api/latest.json?app_id=${id}`, options)
         <?php $image="BookImages/".$rt['image'] ?>
 
 <p class="cur" type={{$currency}}></p>
-        
+
         <div class="book-details">
             <img class="book-cover" id="book-cover-image" src="{{ URL::asset($image) }}" alt="Book Cover">
         <?php $date=Carbon::parse($rt['created_at']) ?>
         <h3 class="title">Book Title: <span class="gb"> {{$rt['title']}}</span></h3>
         <p class="author">Author :{{$rt['author']}} (<span>Uploaded by <a href="{{route('sortAuth',$rt->user_id)}}" style="color: red;"> {{$rt->user['name']}}</a></span>)</p>
              <p>Genre: {{$rt['genre']}}</p>
-          
+
             <p>Description: {{$rt['description']}}</p>
             <p>Published Date: {{$date->toFormattedDateString()}}</p>
             <p>ISBN: {{$rt['ISBN']}}</p>
 
-          
+
             <div class="book-info">
                 <h2>Additional Information</h2>
                 <p>Pages  <b>:</b> {{$rt['page']}}</p>
@@ -163,10 +163,10 @@ fetch(`https://openexchangerates.org/api/latest.json?app_id=${id}`, options)
        @else
        <p  class="download-button">Order</p>
    @endif
-   
- 
+
+
         </div>
-        <input type="hidden" name="book_id" class="item_id" value="{{$rt['id']}}">
+        <input type="hidden" name="book_id" class="item_id book_id" value="{{$rt['id']}}">
         @endforeach
 
         <div id="overlay"></div>
@@ -177,7 +177,7 @@ fetch(`https://openexchangerates.org/api/latest.json?app_id=${id}`, options)
   <p>Feel free to drop your reactions about the book and also on the comment section, I will appriciate that.
   </p>
     <button class="proceed" style="background-color:rgb(0, 140, 255) ;margin-top:10px;">Proceed</button>
-   
+
 </div>
 
 
@@ -195,8 +195,8 @@ fetch(`https://openexchangerates.org/api/latest.json?app_id=${id}`, options)
     </div>
     </div>
 
-   
-      
+
+
     <div class="ratings">
         <h3>Ratings</h3>
         <div class="nv">
@@ -208,30 +208,30 @@ fetch(`https://openexchangerates.org/api/latest.json?app_id=${id}`, options)
             <i class="fa-regular fa-star"id=h5></i>
             <small class="num_raters">0</small>
         </div>
-    
+
     </div>
 
 </div>
     <div class="comment-form">
         <textarea placeholder="Write your comment..." name="content" class="content">{{old('content')}}</textarea>
         <input type="hidden" class="parent_id" value="0">
-        <p class="com_err text-error"></p>      
+        <p class="com_err text-error"></p>
         <input type="hidden" class="ed_id" value=''>
-       
+
         <button type="submit" class="Add_comment">Add Comment</button>
         <button type="submit" class="edit_comment" style="display: none;">Edit Comment</button>
     </div>
     <br>
     <h2>Reviews</h2>
-   
+
 
 
     <div class="comments"></div>
 
 </div>
 
- 
-   
+
+
 </div>
     </section>
 
@@ -244,8 +244,8 @@ fetch(`https://openexchangerates.org/api/latest.json?app_id=${id}`, options)
 
 
     <script>
-        
-   
+
+
     </script>
 
 </body>
