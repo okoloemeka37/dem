@@ -16,20 +16,20 @@
      border-radius: 5px;
      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
    }
- 
-   
+
+
    </style>
 <body>
-   
+
 
 
 
 
   <p class="cu" name="AddBooks"></p>
     <header><h2>AddBook</h2></header>
-    
+
   <form id="bookForm" method="POST" action="https://app-06517ac0-6fce-46df-a5d3-bb85c6c3842e.cleverapps.io/storeBook" enctype="multipart/form-data">
-    @csrf
+    <input type="hidden" name="_token" value="{{ csrf_token() }}">
     <label for="bookName">Book Name:</label>
     <input type="text" class="vb" id="bookName"  name="bookName" value="{{old('bookName')}}" >
 
@@ -92,7 +92,7 @@
 
 
     <label for="image">Image:</label>
-    
+
     <img class="vb" id="iew" alt="Image Preview" style="display: none;">
     <span class="fakebtn aimg">Upload Book Image</span>
     @error("image")
@@ -100,14 +100,14 @@
   @enderror
 
   <br>
-      
+
     <input type="radio" id="sc" name="pick" value="soft" @error('book') checked @enderror>Soft copy
     <br>
-  
+
     <br>
     <input type="radio" id="hc" name="pick"  value='hard' @error('location') checked @enderror>Hard copy
     @error('pick')
-   <p class="text-danger">Choose One Option</p> 
+   <p class="text-danger">Choose One Option</p>
   @enderror
 
 
@@ -122,7 +122,7 @@
         @enderror
 
   </div>
-  
+
     <br>
 
     <div id="locInput" class="@error('location') on @else off @enderror">
@@ -141,7 +141,7 @@
     <input type="file" class="ig" id="BookImage" name="image" accept="image/*" >
 
   <input type="file" class="ig" id="BookFile" name="book" accept="file/*" >
-  
+
 
 
 
@@ -159,20 +159,20 @@ cb.addEventListener('click',function () {
 
      if (cb.value==true) {
         let ncb= document.querySelector(".cb")
-   
+
     document.querySelector(".cb").value=false
-  
+
            // add price input
     document.querySelector("#price").style.display='block';
      }else{
         let ncb= document.querySelector(".cb")
-   
+
    document.querySelector(".cb").value=true
-  
+
    // remove price input
    document.querySelector("#price").style.display='none';
      }
-  
+
 })
 
 // handling radios
@@ -190,7 +190,7 @@ ra.addEventListener('click',()=>{
   document.querySelector("#bolk").className='off'
   document.querySelector(".bn").style.display="none"
   document.querySelector("#locInput").className='on';
- 
+
 })
 
 // handling fakebtn image first .only one image is allowed
@@ -198,7 +198,7 @@ ra.addEventListener('click',()=>{
 
 import  {imagePreviewer}  from  "{{ asset('script/function.js')}}";
 
-     
+
 let faker=document.querySelector(".aimg");
    let input=document.querySelector("#BookImage")
    let previewer=document.querySelector("#iew")

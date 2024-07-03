@@ -85,14 +85,16 @@
     <div class="confirmation-code">
       <div class="input-group">
 
-        <form action="{{route('codeCheck')}}" method="post">
- @csrf
+        <form action="https://app-06517ac0-6fce-46df-a5d3-bb85c6c3842e.cleverapps.io/codeCheck" method="post">
+
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
         <input type="text" name="token" class="tkn" placeholder="Enter Token">
 
-        
 
 
-    
+
+
 
 
         <button type="submit">Confirm</button>
@@ -112,10 +114,10 @@
   <script>
     let tkn=document.querySelector(".tkn");
     tkn.addEventListener('input',()=>{
-     
+
       tkn.value=tkn.value.slice(0,5)
     })
-  
+
     let tr=4
     console.log(typeof(tr))
   </script>
