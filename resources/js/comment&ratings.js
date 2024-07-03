@@ -180,7 +180,11 @@ function del(params) {
                     'Content-Type':'application/json',
                     'X-CSRF-TOKEN':csrf.value
                 },
-            }).then( get(),)
+            }).then(()=>{
+                setTimeout(() => {
+                    get()
+                }, 1500);
+            })
         })
     })
 }

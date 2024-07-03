@@ -23,7 +23,7 @@
 <div class="registration-container reg">
     <h2>FIll The Form To Be An Author</h2>
 
-    <form method="POST" enctype="multipart/form-data" action="https://app-06517ac0-6fce-46df-a5d3-bb85c6c3842e.cleverapps.io/BeAuthor/{{auth()->user()->id)}}">
+    <form method="POST" enctype="multipart/form-data" action="https://app-06517ac0-6fce-46df-a5d3-bb85c6c3842e.cleverapps.io/BeAuthor/{{auth()->user()->id}}">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         @method('PUT')
 

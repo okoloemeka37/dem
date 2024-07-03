@@ -92,8 +92,9 @@ button:hover {
             </div>
         @endif
 
-        <form action="{{route("report_store")}}" method="POST">
-            @csrf
+        <form action="https://app-06517ac0-6fce-46df-a5d3-bb85c6c3842e.cleverapps.io/reportstore" method="POST">
+
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
             <label for="reported_type">Report Type:</label>
             <select name="type" id="reported_type"  required>
