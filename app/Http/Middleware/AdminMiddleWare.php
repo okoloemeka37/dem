@@ -4,8 +4,8 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-
-class AdminMiddleware
+//AdminMiddleware
+class AdminMiddleWare
 {
     public function handle(Request $request, Closure $next)
     {
