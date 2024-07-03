@@ -14,7 +14,7 @@ class PostsController extends Controller
    }
 
 
-  
+
 
 
    function owner(){
@@ -58,7 +58,7 @@ class PostsController extends Controller
 
 
       foreach($us as $user){
-      
+
 $likes=json_decode($user['liked_topics']);
 if(in_array($request->genre,$likes)){
    //mail interested user
@@ -103,19 +103,16 @@ if(in_array($request->genre,$likes)){
       'image'=>'nullable|image|max:500',
    ]);
 $image='';
-   
+
    if($request->image=== NULL){
       $image=$request["old-image"];
-      
+
               }
               else{
                   $image=time().'.'.$request->image->extension();
                   $request->image->move(public_path("postImages"),$image);
-      
-                  //removing existing image
-                  $oldimage=public_path("postImages/".$request["old-image"]);
-                  //unlink($oldimage);
-        
+
+
               }
 
               $post=Posts::find($id);
@@ -126,7 +123,7 @@ $image='';
                'slug'=>$data['slug'],
                'content'=>$data['content'],
                'image'=>$image,
-              
+
                'tag'=>$data['tag'],
 
 
@@ -145,9 +142,9 @@ $image='';
    if ($post['user']['id']===auth()->user()->id) {
       $imageName=$post['image'];
       $post->forceDelete();
-      unlink(public_path('postImages/'.$imageName));
+
       return response()->json(['message'=>'Book Deleted successfully.']);
-     
+
    }else{
       return response()->json(['message'=>'You Are Not Authorize']);
    }

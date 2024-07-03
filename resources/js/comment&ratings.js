@@ -18,12 +18,15 @@ if (document.querySelector(".check")) {
     })
 
 
+    if (document.querySelector(".down") !== null) {
+
 
     document.querySelector(".down").addEventListener('click',()=>{
         document.querySelector("#popup-container").style.display="block"
         document.querySelector("#overlay").style.display="block"
         document.querySelector(".alert2").style.display="block"
     })
+}
 }
 
 

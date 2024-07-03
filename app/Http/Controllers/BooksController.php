@@ -17,18 +17,18 @@ class BooksController extends Controller
 
     function single($id){
         $book=Books::where('id','=',$id)->with('user')->get();
-    
+
         return view('all.Book',['book'=>$book,'message'=>'']);
-    } 
+    }
 
     function s_deleted($id){
         $book=Books::where('id','=',$id)->with('comment')->withTrashed()->with('user')->get();
 
-      
+
         $note=Notification::where('book_id','=',$id)->get();
 return view('all.deleted_books',['book'=>$book,'note'=>$note]);
 
-    } 
+    }
 
 
 
@@ -49,12 +49,12 @@ return view('all.deleted_books',['book'=>$book,'note'=>$note]);
         return view('user.books',['books'=>$normBooks]);
     }
     function show(){
-        
+
         return    view('all.AddBook');
     }
 
 
- 
+
 
 
   public function store(Request $request){
@@ -68,8 +68,8 @@ return view('all.deleted_books',['book'=>$book,'note'=>$note]);
     'page'=>'required|numeric',
     'ISBN'=>'required|numeric',
     'language'=>'required|string',
-    
-]); 
+
+]);
 
 if($request["free"] == "false"){
 $request->validate(["price"=>"required|numeric"]);
@@ -79,27 +79,27 @@ $free="false";
     $free="true";
     $price="";
 }
-  
+
     if($request["pick"] == 'hard'){
         $request->validate(["location"=>"required"]);
-       
+
         $location=$request['location'];
         $copy='hard';
     }
     $imageName = time().'.'.$request->image->extension();
     if($request["pick"] == 'soft'){
-        
+
         $request->validate(["book"=>"required"]);
-       
+
         $location='';
         $copy='soft';
-       
+
     }
 
-   
+
 
     //upload BookImage
-   
+
     $request['image']->move(public_path('BookImages'), $imageName);
 
     if($request["pick"] == 'soft'){
@@ -138,7 +138,7 @@ $request['book']->move(public_path('Books'), $bookName);
 
        $us=User::where("liked_genres",'!=','')->get();
        foreach($us as $user){
-       
+
 $likes=json_decode($user['liked_genres']);
 if(in_array($request->genre,$likes)){
     Mail::to($user['email'])->send(new addBook($data));
@@ -146,7 +146,7 @@ if(in_array($request->genre,$likes)){
 
        }
 
-       
+
 
 
 
@@ -159,7 +159,7 @@ if(in_array($request->genre,$likes)){
     }
 
 
- 
+
 
 
     //show  edit page for Books
@@ -183,8 +183,8 @@ if(in_array($request->genre,$likes)){
             'page'=>'required|numeric',
     'ISBN'=>'required|numeric',
     'language'=>'required|string',
-        ]); 
-       
+        ]);
+
         if($request['free']===NULL){
             $request['free']='false';
         }
@@ -193,43 +193,43 @@ if($request["free"] === "false"){
     $request->validate(["price"=>"required|numeric"]);
     $price=$request['price'];
     $free="false";
-    
+
     }else{
         $free="true";
         $price="";
     }
-      
+
         if($request["pick"] == 'hard'){
             $request->validate(["location"=>"required"]);
             $bookLink='';
             $location=$request['location'];
             $copy='hard';
         }
-       
+
         if($request["pick"] == 'soft'){
-            
+
             $request->validate(["book"=>"nullable"]);
-           
+
             $location='';
             $copy='soft';
-           
+
 
             if($request->book=== NULL){
                 $book=$request["old-book"];
-    
+
                         }
                         else{
                             if(!$request['old-book']==NULL){
-                                $oldbookPath=public_path("Books/".$request["old-book"]);  
-                                unlink($oldbookPath);                             
+                                $oldbookPath=public_path("Books/".$request["old-book"]);
+                                unlink($oldbookPath);
                             }
 
 
                             $book=$request->book->getClientOriginalName();
                             $request->book->move(public_path("Books"),$book);
 
-                            
-                           
+
+
                         }
         }else{
             $book=' ';
@@ -248,20 +248,20 @@ $image=$request["old-image"];
             //removing existing image
             $oldbookimage=public_path("BookImages/".$request["old-image"]);
             unlink($oldbookimage);
-  
+
         }
-       
-            
+
+
 
 
 $bookFound=Books::find($id);
-        
+
    $bookFound->update([
         'title'=>$request['bookName'],
         'description'=>$request['description'],
         'price'=>$price,
         'link'=>$book,
-        
+
         'genre'=>$request['genre'],
         'page'=>$request['page'],
         'ISBN'=>$request['ISBN'],
@@ -279,11 +279,11 @@ $bookFound=Books::find($id);
         return redirect()->route('Authorbook')->with('success', 'Book Added successfully.');
        }
     }
-// force deleting 
+// force deleting
 
     function delete_book($id){
       $book= Books::withTrashed()->find($id);
-      
+
      if($book["user_id"]==auth()->user()->id){
 
      }else{
@@ -296,19 +296,19 @@ $bookFound=Books::find($id);
             'type'=>'Deleted',
             'for_text'=>'Book',
             'item_title'=>$book->title
-           
+
        ]);
      }
-   
+
 //remove image
 $imagePath=public_path("BookImages/".$book['image']);
-unlink($imagePath);
-    
+
+
       //removing Book
 
       if(!empty($book['link'])){
         $bookPath=public_path("Books/".$book['link']);
-unlink($bookPath);
+
       }
       $book->forceDelete();
         return response()->json(["message"=>"Book Deleted Successfully"]);
@@ -322,7 +322,7 @@ unlink($bookPath);
         $jsonData = json_decode($request->getContent(), true);
         $book_id=$jsonData['book_id'];
         $book=Books::withTrashed()->find($book_id);
-       
+
         $user_id=$book['user_id'];
         $reason=$jsonData['reason'];
         $title=$book['title'];
@@ -363,7 +363,7 @@ unlink($bookPath);
         'item_title'=>$book['title'],
    ]);
 
-       
+
 
     }
 
