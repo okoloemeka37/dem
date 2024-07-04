@@ -243,5 +243,5 @@ Route::middleware(['guest'])->group(function () {
 
 
 Route::get("/feature",function (){
-    return view('feature');
+    return view('features');
 })->name('feature');
